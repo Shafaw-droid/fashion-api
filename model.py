@@ -68,7 +68,7 @@ class Customer(db.Model):
     customer_name = db.Column(db.String(80), index=True, nullable=False)
     contact = db.Column(db.String(80), index=True, nullable=False)
     gender = db.Column(db.String(80), index=True, nullable=False)
-    age = db.Column(db.String(80), index=True, nullable=False)
+    dob = db.Column(db.DateTime, index=True, nullable=True)
 
     favorite_brands = db.relationship('CustomerFavoriteBrands', back_populates='customer', cascade='all,delete-orphan')
     favorite_clothes = db.relationship('CustomerFavoriteClothing', back_populates='customer',

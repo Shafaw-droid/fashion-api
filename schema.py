@@ -58,7 +58,7 @@ CustomerField = {
     'customer_name': fields.String,
     'contact': fields.String,
     'gender': fields.String,
-    'age': fields.Integer,
+    'dob': fields.DateTime,
 
     'preferences': fields.List(fields.Nested(StylingPreferenceField)),
     'favorite_brands': fields.List(fields.Nested(FavoriteBrandField)),

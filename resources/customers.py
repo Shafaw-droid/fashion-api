@@ -1,4 +1,4 @@
-from flask_restful import Resource, reqparse, marshal_with, abort
+from flask_restful import Resource, reqparse, marshal_with, abort, inputs
 from extension import db
 from schema import CustomerField
 from model import Customer
@@ -7,7 +7,7 @@ customer_args = reqparse.RequestParser()
 customer_args.add_argument('customer_name', type=str, required=True, help='Customer name is required')
 customer_args.add_argument('contact', type=str, required=True)
 customer_args.add_argument('gender', type=str, choices=('male', 'female', 'other'), required=True)
-customer_args.add_argument('age', type=int, required=True)
+customer_args.add_argument('dob', type=inputs.date, required=True)
 
 
 class CustomerResources(Resource):
@@ -20,7 +20,7 @@ class CustomerResources(Resource):
     def post(self):
         args = customer_args.parse_args()
         customer = Customer(customer_name=args['customer_name'], contact=args['contact'], gender=args['gender'],
-                            age=args['age'])
+                            dob=args['dob'])
         db.session.add(customer)
         db.session.commit()
         return Customer.query.all(), 201
@@ -43,7 +43,7 @@ class CustomerList(Resource):
         customer.customer_name = args['customer_name']
         customer.contact = args['contact']
         customer.gender = args['gender']
-        customer.age = args['age']
+        customer.dob = args['dob']
         db.session.commit()
         return customer, "Update successful", 200
 

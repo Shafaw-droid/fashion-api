@@ -2,34 +2,31 @@ from flask_restful import fields
 
 from model import Clothing
 
-BrandField={
-    'brand_id':fields.Integer,
-    'brand_name':fields.String,
-    'brand_country':fields.String,
-    'founder_yr':fields.Integer
+BrandField = {
+    'brand_id': fields.Integer,
+    'brand_name': fields.String,
+    'brand_country': fields.String,
+    'founder_yr': fields.Integer
 }
-
-
 
 ClothingField = {
     'clothing_id': fields.Integer,
     'clothing_name': fields.String,
     'category': fields.String,
     'size': fields.String,
-    'color': fields.String,
+    'colour': fields.String,
     'price': fields.Float,
     'brand': fields.Nested(BrandField),
 }
 
-
-OutfitField= {
+OutfitField = {
     'outfit_id': fields.Integer,
     'outfit_name': fields.String,
     'occasion': fields.String,
     'season': fields.String,
 }
 
-StylingPreferenceField={
+StylingPreferenceField = {
     'preference_id': fields.Integer,
     'preferred_style': fields.String,
     'preferred_color': fields.String,
@@ -38,21 +35,21 @@ StylingPreferenceField={
     'budget_range': fields.String,
 }
 
-
-
-FavoriteBrandField={
-    'id': fields.Integer,
+FavoriteBrandField = {
+    'favorite_brand_id': fields.Integer,
+    'customer_id': fields.Integer,
     'brand': fields.Nested(BrandField),
 }
 
-FavoriteClothingField= {
-    'id': fields.Integer,
-    'clothing': fields.Nested(ClothingField),
+FavoriteClothingField = {
+    'favorite_clothing_id': fields.Integer,
+    'customer_id': fields.Integer,
+    'clothing': fields.Nested(ClothingField)
 }
 
-
 SavedOutfitField = {
-    'id': fields.Integer,
+    'saved_outfit_id': fields.Integer,
+    'customer_id': fields.Integer,
     'outfit': fields.Nested(OutfitField),
 }
 
@@ -68,6 +65,3 @@ CustomerField = {
     'favorite_clothes': fields.List(fields.Nested(FavoriteClothingField)),
     'saved_outfits': fields.List(fields.Nested(SavedOutfitField)),
 }
-
-
-
